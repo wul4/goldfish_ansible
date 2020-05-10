@@ -146,3 +146,4 @@ location / { proxy_pass http://backend; }
 + Docker + python-docker installation on offline nodes?
 + Template port into nginx conf and app files 
 + Test Alpine image on nginx
++ Make a cleanup playbook
