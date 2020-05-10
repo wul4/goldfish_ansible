@@ -5,8 +5,12 @@ CentOS 7 EOL is Q4 2020
 This environment is not hardened at all, only for testing and playing around!
 
 ## About
+The idea is to generalize this to be a solution for deploying your own flask apps using nginx and uWSGI.
+
+
 The goldfish environment can be used to practice making REST API interfaces.  
 goldfish itself is a flask-uwsgi web app that provides two REST API's for testing purposes.
+
 
 The application code can be found in:
 ```
@@ -137,6 +141,7 @@ location / { proxy_pass http://backend; }
 
 
 ## To Do
++ Generalize this to be a solution for deploying your own flask apps using nginx and uWSGI.
 + Sticky loadbalancing for nginx (not done for the sake of being able to test both web servers easily)
 + Add support for setting up a Docker registry node
 + Add support to spin the needed nodes up on some cloud platform?
