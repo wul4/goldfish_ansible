@@ -1,0 +1,30 @@
+---
+- hosts: control
+  roles:
+    - common
+    - control
+
+# move docker image to lb nodes
+- hosts: lb
+  tasks:
+    - copy:
+        src: roles/control/files/goldfish_lb.tar
+        dest: /tmp/
+
+# move docker image to webserver nodes
+- hosts: web
+  tasks:
+    - copy:
+        src: roles/control/files/goldfish_web.tar
+        dest: /tmp/
+
+# clean up archives on control machine
+- hosts: control
+  tasks:
+    - file:
+        path: "{{ ansible_dir }}/roles/control/files/goldfish_lb.tar"
+        state: absent
+    - file:
+        path: "{{ ansible_dir }}/roles/control/files/goldfish_web.tar"
+        state: absent
+

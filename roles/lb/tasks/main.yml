@@ -1,0 +1,21 @@
+---
+- name: load docker image
+  docker_image:
+    name: goldfish_lb
+    load_path: /tmp/goldfish_lb.tar
+    source: load
+  become: yes
+
+- name: remove archived image
+  file:
+    path: /tmp/goldfish_lb.tar
+    state: absent
+
+- name: run docker container
+  docker_container:
+    image: goldfish_lb
+    name: lb
+    ports:
+      - "{{ http_port }}:{{ http_port }}"
+    state: started
+  become: yes

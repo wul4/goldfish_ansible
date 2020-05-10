@@ -1,0 +1,33 @@
+paths:
+  /world/bar:
+    get:
+      operationId: goldfish.api.v1.example.hello_world.get_bar
+      responses:
+        '200':
+          description: Success
+    post:
+      operationId: goldfish.api.v1.example.hello_world.post_bar
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      operationId: goldfish.api.v1.example.hello_world.delete_bar
+      responses:
+        '200':
+          description: Success
+
+info:
+  title: Example Hello World API
+  version: '1'
+  description: Example Hello World API
+servers:
+  - url: /api/v1/hello
+openapi: 3.0.0

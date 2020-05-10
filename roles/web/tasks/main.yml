@@ -1,0 +1,23 @@
+---
+- name: load docker image
+  docker_image:
+    name: goldfish_lb
+    load_path: /tmp/goldfish_web.tar
+    source: load
+  become: yes
+
+- name: remove archived image
+  file:
+    path: /tmp/goldfish_web.tar
+    state: absent
+
+- name: run docker container
+  docker_container:
+    image: goldfish_web
+    name: web
+    ports:
+      - "{{ http_port }}:{{ http_port }}"
+    env:
+        DYNACONF_EXAMPLE_SETTING: "{{ DYNACONF_EXAMPLE_SETTING }}"
+    state: started
+  become: yes

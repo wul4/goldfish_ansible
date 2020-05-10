@@ -1,0 +1,30 @@
+# servers running goldfish webapp
+[web]
+# 192.168.1.[110:120]
+# 192.168.1.200
+
+# nginx http loadbalancers
+[lb]
+# 192.168.1.[100:109]
+# 192.168.1.100
+
+# our local control machine
+[control]
+localhost
+
+# variables for web role
+[web:vars]
+remote_user=user
+http_port=80
+DYNACONF_EXAMPLE_SETTING=foobar
+
+# variables for lb role
+[lb:vars]
+remote_user=user
+http_port=80
+
+[control:vars]
+# for control role nodes ssh is not used
+ansible_connection=local
+# goldfish_ansible dir on the control machine
+ansible_dir=/home/user/goldfish_ansible

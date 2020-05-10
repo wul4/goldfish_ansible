@@ -1,0 +1,6 @@
+FROM tiangolo/uwsgi-nginx-flask:python3.6-alpine3.8
+
+COPY requirements.txt /tmp/
+RUN pip install -U pip && pip install -r /tmp/requirements.txt
+
+COPY ./goldfish /app

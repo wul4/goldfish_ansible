@@ -1,0 +1,33 @@
+---
+- name: remove lb docker image
+  docker_image:
+    state: absent
+    name: goldfish_lb
+    tag: latest
+  become: yes
+
+- name: remove lb templated nginx conf
+  file:
+    path: "{{ ansible_dir }}/roles/control/files/lb.conf"
+    state: absent
+
+- name: remove web docker image
+  docker_image:
+    state: absent
+    name: goldfish_web
+    tag: latest
+  become: yes
+
+- name: remove nginx docker image
+  docker_image:
+    state: absent
+    name: nginx
+    tag: latest
+  become: yes
+
+- name: remove uwsgi-nginx-flask docker image
+  docker_image:
+    state: absent
+    name: tiangolo/uwsgi-nginx-flask
+    tag: python3.6-alpine3.8
+  become: yes

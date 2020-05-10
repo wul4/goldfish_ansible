@@ -1,0 +1,14 @@
+upstream backend {
+{% for host in groups['web'] %}
+   server {{ host }};
+{% if not loop.last %}{% endif %}
+{% endfor %}
+}
+
+server {
+   listen 80;
+
+   location / {
+      proxy_pass http://backend;
+   }
+}

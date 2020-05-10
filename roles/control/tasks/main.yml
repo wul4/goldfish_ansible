@@ -1,0 +1,53 @@
+---
+- name: generate LB nginx conf from template
+  template: 
+    src: "{{ ansible_dir }}/roles/control/templates/lb_conf.j2" 
+    dest: "{{ ansible_dir }}/roles/control/files/lb.conf"
+  run_once: yes
+
+- name: build lb docker image
+  docker_image:
+    build:
+      dockerfile: goldfish_Dockerfile_lb
+      path: "{{ ansible_dir }}/roles/control/files/"
+      pull: no
+    state: present
+    name: goldfish_lb
+    tag: latest
+    source: build
+  become: yes
+
+- name: archive lb docker image
+  docker_image:
+    name: goldfish_lb
+    archive_path: "{{ ansible_dir }}/roles/control/files/goldfish_lb.tar"
+    tag: latest
+    source: local
+  become: yes
+  notify:
+  - remove lb templated nginx conf
+  - remove lb docker image
+
+- name: build web docker image
+  docker_image:
+    build:
+      dockerfile: goldfish_Dockerfile_web
+      path: "{{ ansible_dir }}/roles/control/files/"
+      pull: no
+    state: present
+    name: goldfish_web
+    tag: latest
+    source: build
+  become: yes
+
+- name: archive web image
+  docker_image:
+    name: goldfish_web
+    archive_path: "{{ ansible_dir }}/roles/control/files/goldfish_web.tar"
+    tag: latest
+    source: local
+  become: yes
+  notify:
+  - remove web docker image
+  - remove nginx docker image
+  - remove uwsgi-nginx-flask docker image

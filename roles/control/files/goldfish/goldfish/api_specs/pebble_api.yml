@@ -1,0 +1,33 @@
+paths:
+  /pebble:
+    get:
+      operationId: goldfish.api.v2.newapi.pebble.get_pebble
+      responses:
+        '200':
+          description: Success
+    post:
+      operationId: goldfish.api.v2.newapi.pebble.post_pebble
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      operationId: goldfish.api.v2.newapi.pebble.delete_pebble
+      responses:
+        '200':
+          description: Success
+
+info:
+  title: Pebble API
+  version: '1'
+  description: One of the greatest API's
+servers:
+  - url: /api/v2/newapi
+openapi: 3.0.0

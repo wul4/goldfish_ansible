@@ -1,0 +1,4 @@
+---
+- import_playbook: prepare_nodes.yml
+- import_playbook: deploy_docker_webservers.yml
+- import_playbook: deploy_docker_loadbalancers.yml
