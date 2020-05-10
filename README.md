@@ -18,7 +18,7 @@ Preparation (such as preparing Docker images for nodes) happens on the control n
 to centralize the file structure to one machine.
 
 This Ansible directory includes some test scripts to make sure all the nodes are running properly.
-See *running tests* for more information about testing the environment
+See *running tests* for more information about testing the environment.
 
 ## Components
 This image uses the following Docker images:
